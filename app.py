@@ -10,7 +10,7 @@ import datetime
 
 
 app = Flask(__name__)
-GMAPS_KEY = os.getenv('GOOGLE_MAP')
+#GMAPS_KEY = os.getenv('GOOGLE_MAP')
 app.CENTER = [40.7639206199602, -73.9383529238219]
 app.LAT = (40.477399,40.917577)
 app.LNG = (-74.25909, -73.700009)
