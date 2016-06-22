@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,6 +48,10 @@
 
     <![endif]-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- <style type="text/css">
+   body { background: black !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+</style> -->
+
 
   </head>
 
@@ -67,6 +71,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="#home" class="smoothScroll">Home</a></li>
+            <li> <a href="#heartbeat" class="smoothScroll">Heartbeat of NYC</a></li>
 			<li> <a href="#about" class="smoothScroll"> Where to Go</a></li>
 			<li> <a href="#services" class="smoothScroll"> Relative Popularity</a></li>
 			<li> <a href="#team" class="smoothScroll">NYC on Average</a></li>
@@ -82,13 +87,39 @@
 		<!-- ==== HEADERWRAP ==== -->
 	    <div id="headerwrap" id="home" name="home">
 			<header class="clearfix">
-	  		 		<h1><span class = "icon" >NYC - a Taxi's Perspective</span></h1>
+	  		 		<h1><span class = "icon" >There and Back Again A Taxi's Tale</span></h1>
 	  		 		<
 	  		 		<!-- <p>Where the Taxi Cabs Are.</p> -->
 	  		</header>	    
 	    </div><!-- /headerwrap -->
 
 		<!-- ==== GREYWRAP ==== -->
+<div  id="services" name="heartbeat">
+		<div id="greywrap">
+			
+			<div class="row white" >
+			<center>
+				<div >
+					<span class="icon icon-play"></span>
+					<h2>NYC's Heartbeat</h2>
+					<p>See the concentration of dropoffs change over the course of a day</p>
+				</div><!-- col-lg-4 -->	
+			</center>
+				
+			</div><!-- row -->
+			
+		</div><!-- greywrap -->
+
+</div>
+<span id = "blackwrap">
+<center>
+<video width="750" height="500" controls loop>
+  <source src="static/clips/taxi_drop_best.mp4" type="video/mp4">
+  
+Your browser does not support the video tag.
+</video>
+</center>
+</span>
 <div  id="about" name="about">
 		<div id="greywrap">
 			
@@ -106,55 +137,13 @@
 		</div><!-- greywrap -->
 
 </div>
+
  <span>
 
-  <div id="map" style="width: 100%; height: 100% margin: 0 auto;" class = "icon">
+  <div id="map" style="width: 100%; height: 100% margin: 0 auto;" class = "icon"></div>
  
-  	<script>
-      var center = {{center |safe}};
-      var lat_list = {{plot_lat |tojson}};
-      var lng_list = {{plot_lng |tojson}};
-      // var test_lng = lng_list[0]
-      var map;
-      function initMap() {
-        
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: center[0], lng: center[1]},
-          zoom: 11,
-          scrollwheel: false
-          
-
-        });
-        map.set('styles', [{"featureType":"all","elementType":"all","stylers":[{"invert_lightness":true},{"saturation":"0"},{"lightness":"33"},{"gamma":0.5},{"hue":"#f7b731"},{"weight":"1.51"}]},{"featureType":"transit.station.rail","elementType":"labels.text","stylers":[{"gamma":"1.00"}]},{"featureType":"transit.station.rail","elementType":"labels.text.fill","stylers":[{"hue":"#ff0000"},{"lightness":"42"}]},{"featureType":"transit.station.rail","elementType":"labels.icon","stylers":[{"hue":"#ff0000"},{"invert_lightness":true},{"lightness":"-15"},{"saturation":"31"}]}]);
-
-
-        var image = {
-		    url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
-		    // This marker is 20 pixels wide by 32 pixels high.
-		    size: new google.maps.Size(25, 25),
-		    // The origin for this image is (0, 0).
-		    origin: new google.maps.Point(0, 0),
-		    // The anchor for this image is the base of the flagpole at (0, 32).
-		    anchor: new google.maps.Point(0, 32)
-
-		  };
-
-        for (i = 0; i < lat_list.length; i++)
-        {
-            var title = i.toString()
-            var position = new google.maps.LatLng(Number(lat_list[i]),Number(lng_list[i]));
-            
-            marker = new google.maps.Marker({position:position, icon:image,map:map});
-        }
+  	
     
-      }
-
-    </script>
-    <script async defer
-    src={{src|safe}}>
-    </script>
-
-  </div>
     
 <center>		
 
@@ -201,6 +190,8 @@
     </div>
     </center>
    </span>
+   
+   
 		<!-- ==== ABOUT ==== -->
 		
 			<!-- <div class="row white">
@@ -214,7 +205,7 @@
 				
 				<div >
 				<div>
-					<p>Using data from drop-offs in 2015 we implemented a DBScan clustering algorithm, clustering based on the Borough, as well as the date, since a disproportionate number of drop-offs occur in Manhattan, approximately 82% We also used different clustering criteria for Manhattan since drop-offs occur within closer proximity of each other.</p>
+					<p>Using data from drop-offs in 2015 we implemented a DBScan clustering algorithm, grouping by the Borough, as well as the date, since a disproportionate number of drop-offs occur in Manhattan, approximately 82%. We also used different clustering criteria for Manhattan since drop-offs occur within closer proximity of each other.</p>
 				</div><!-- col-lg-6 -->
 			</div><!-- row 
 		</div><!-- container -->
@@ -650,12 +641,64 @@
 		
 		</div><!-- container -->
 
+
 		<!-- <div id="footerwrap">
 			<div class="container">
 				<h4>Created by <a href="http://blacktie.co">BlackTie.co</a> - Copyright 2014</h4>
 			</div>
 		</div> -->
 
+  <script>
+      var center = {{center |safe}};
+      var lat_list = {{plot_lat |tojson}};
+      var lng_list = {{plot_lng |tojson}};
+      // var test_lng = lng_list[0]
+      var map;
+  
+      function initMap() {
+        
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: center[0], lng: center[1]},
+          zoom: 11,
+          scrollwheel: false  
+
+        });
+      
+
+        
+
+
+        map.set('styles', [{"featureType":"all","elementType":"all","stylers":[{"invert_lightness":true},{"saturation":"0"},{"lightness":"33"},{"gamma":0.5},{"hue":"#f7b731"},{"weight":"1.51"}]},{"featureType":"transit.station.rail","elementType":"labels.text","stylers":[{"gamma":"1.00"}]},{"featureType":"transit.station.rail","elementType":"labels.text.fill","stylers":[{"hue":"#ff0000"},{"lightness":"42"}]},{"featureType":"transit.station.rail","elementType":"labels.icon","stylers":[{"hue":"#ff0000"},{"invert_lightness":true},{"lightness":"-15"},{"saturation":"31"}]}]);
+
+        
+        var image = {
+		    url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+		    // This marker is 20 pixels wide by 32 pixels high.
+		    size: new google.maps.Size(25, 25),
+		    // The origin for this image is (0, 0).
+		    origin: new google.maps.Point(0, 0),
+		    // The anchor for this image is the base of the flagpole at (0, 32).
+		    anchor: new google.maps.Point(0, 32)
+
+		  };
+
+        for (i = 0; i < lat_list.length; i++)
+        {
+            var title = i.toString()
+            var position = new google.maps.LatLng(Number(lat_list[i]),Number(lng_list[i]));
+            
+            marker = new google.maps.Marker({position:position, icon:image,map:map});
+        }
+    
+      }
+
+ 
+      
+
+    </script>
+    <script async defer
+    src={{src|safe}}>
+    </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
