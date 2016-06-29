@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" >
+
   <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SHIELD - Free Bootstrap 3 Theme">
-    <meta name="author" content="Carlos Alvarez - Alvarez.is - blacktie.co">
+    <meta name="description" content="NYC - A Taxi's Tale">
+    <meta name="author" content="Trevor Rempel">
     <link rel="shortcut icon" href="static/ico/favicon.png">
 
-    <title> SHIELD - Free Bootstrap 3 Theme</title>
+    <title>NYC - A Taxi's Tale</title>
+    <link rel="apple-touch-icon" sizes="76x76" href='static/img/nyc_cab_logo.jpg'>
+    <link rel="icon" type="image/png" sizes="96x96" href='static/img/nyc_cab_logo.jpg'>
+
 
     <!-- Bootstrap core CSS -->
     <link href="static/css/bootstrap.css" rel="stylesheet">
+
+
+
 
     <!-- Custom styles for this template -->
     <link href="static/css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/icomoon.css">
     <link href="static/css/animate-custom.css" rel="stylesheet">
+
+
 
 
     
@@ -24,174 +34,304 @@
     
     <script src="static/js/jquery.min.js"></script>
 	<script type="text/javascript" src="static/js/modernizr.custom.js"></script>
-    
-    <style>
-      html, body {
-        height: 100%;
-        width: 100%;
-        margin: 10;
-        padding: 10;
-      }
-      #map {
-        height: 75%;
-        width: 75%;
-        vertical-align: middle;
-        text-align: center;
-        background-color: #000
-      }
-    </style>
-    
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="static/js/html5shiv.js"></script>
-      <script src="static/js/respond.min.js"></script>
 
-    <![endif]-->
+	
+
+
+
+
+
+    
+
+    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- <style type="text/css">
-   body { background: black !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
-</style> -->
+    <link src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.1.0/css/bootstrap-slider.css"></script>
+    <link src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.1.0/css/bootstrap-slider.min.css"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.1.0/bootstrap-slider.js"></script>
+	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.1.0/bootstrap-slider.min.js"></script>
+	<!-- <style type="text/css">
+		   body { background: black !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+		 </style> -->
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-*.min.js"></script>
+
+	<style>
+	      html, body {
+	        height: 100%;
+	        width: 100%;
+	        margin: 10;
+	        padding: 10;
+	      }
+
+	      #map {
+	        height: 75%;
+	        width: 75%;
+	        vertical-align: middle;
+	        text-align: center;
+	        background-color: #000
+	      }
+	      #map2 {
+	        height: 75%;
+	        width: 75%;
+	        vertical-align: middle;
+	        text-align: center;
+	        background-color: #000
+	      }
+
+	      #select-input {
+    			text-align: center;	
+    			form-inline: margin:5px 3px;
+
+			}
+    </style>
+    <style type="text/css">
+    .btn:focus {
+  		outline: #f7b731;
+  		border-color: #f7b731;
+  		/*background-color:#000000;
+  		color:#f7b731;*/
+	}
+	 /*body { background: #f7b731 !important; }*/
+	</style>
+
+
+		<style type="text/css">
+			div#map { margin: 0 auto 0 auto; }
+			div#map2 { margin: 0 auto 0 auto; }
+		</style>
+
 
 
   </head>
 
   <body data-spy="scroll" data-offset="0" data-target="#navbar-main">
   
+	<div id="get">
+			{% if scroll %}
+			<script>
+			    document.location.hash = '#' + '{{ scroll |safe}}';
+			</script>
+			{% endif %}
+	</div>
   
   	<div id="navbar-main">
+
       <!-- Fixed navbar -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+   	  <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="container">
+
+          <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
             <span class="icon icon-map" style="font-size:30px; color:#f7b731;"></span>
-          </button>
-          <a class="navbar-brand hidden-xs hidden-sm" href="#home"><span class="icon icon-map" style="font-size:18px; color:#f7b731;"></span></a>
+
+          	</button>
+
+            <a class="navbar-brand hidden-xs hidden-sm" href="#home">
+             <span class="icon icon-map" style="font-size:18px; color:#f7b731;"></span>
+            </a>
+          </div>
+
+          <div class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav">
+
+              <li><a href="#home" class="smoothScroll">Home</a></li>
+              <li> <a href="#heartbeat" class="smoothScroll">Heartbeat of City</a></li>
+			  <li> <a href="#dbscan" class="smoothScroll"> Drivers</a></li>
+			  <li> <a href="#popularity" class="smoothScroll"> Consumers</a></li>
+			  <li> <a href="#average" class="smoothScroll">NYC on Average</a></li>
+			  <li> <a href="#explain" class="smoothScroll">DBScan</a></li>
+			  <li> <a href="#contact" class="smoothScroll"> Contact</a></li>
+
+		     </ul>
+
+           </div><!--/.nav-collapse -->
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="#home" class="smoothScroll">Home</a></li>
-            <li> <a href="#heartbeat" class="smoothScroll">Heartbeat of NYC</a></li>
-			<li> <a href="#about" class="smoothScroll"> Where to Go</a></li>
-			<li> <a href="#services" class="smoothScroll"> Relative Popularity</a></li>
-			<li> <a href="#team" class="smoothScroll">NYC on Average</a></li>
-			<li> <a href="#portfolio" class="smoothScroll">DBScan</a></li>
-			<!-- <li> <a href="#blog" class="smoothScroll"></a></li> -->
-			<li> <a href="#contact" class="smoothScroll"> Contact</a></li>
-        </div><!--/.nav-collapse -->
       </div>
     </div>
-    </div>
-
   
 		<!-- ==== HEADERWRAP ==== -->
-	    <div id="headerwrap" id="home" name="home">
-			<header class="clearfix">
-	  		 		<h1><span class = "icon" >NYC - A Taxi's Perspective</span></h1>
-	  		 		<
-	  		 		<!-- <p>Where the Taxi Cabs Are.</p> -->
-	  		</header>	    
-	    </div><!-- /headerwrap -->
+	<div id="headerwrap" id="home" name="home">
+
+	  <header class="clearfix">
+
+	    <h1><span class = "icon" >NYC - A Taxi's Perspective</span></h1>
+
+	   </header>	    
+	 </div><!-- /headerwrap -->
 
 		<!-- ==== GREYWRAP ==== -->
-<div  id="services" name="heartbeat">
-		<div id="greywrap">
+	
+
+    <div  id="heartbeat" name="heartbeat">
+    	<br>
+		<hr>
+		<br>
+
+	  <div id="greywrap">
 			
-			<div class="row white" >
-			<center>
-				<div >
-					<span class="icon icon-play"></span>
-					<h2>NYC's Heartbeat</h2>
-					<p>See the concentration of dropoffs change over the course of a day</p>
-				</div><!-- col-lg-4 -->	
-			</center>
+	    <div class="row white" >
+
+		  <center>
+		    <div >
+
+			  <span class="icon icon-play"></span>
+			    <h2>NYC's Heartbeat</h2>
+
+			       <p>See the concentration of dropoffs change over the course of a day</p>
+
+			</div>
+		  </center>
 				
-			</div><!-- row -->
+	     </div>
 			
-		</div><!-- greywrap -->
-
-</div>
-<span id = "blackwrap">
-<center>
-<video width="750" height="500" controls loop>
-  <source src="static/clips/taxi_drop_best.mp4" type="video/mp4">
-  
-Your browser does not support the video tag.
-</video>
-</center>
-</span>
-<div  id="about" name="about">
-		<div id="greywrap">
-			
-			<div class="row white" >
-			<center>
-				<div >
-					<span class="icon icon-location"></span>
-					<h2>Where to go in NYC</h2>
-					<p>Select a date and time to see the most popular locations.</p>
-				</div><!-- col-lg-4 -->	
-			</center>
-				
-			</div><!-- row -->
-			
-		</div><!-- greywrap -->
-
-</div>
-
- <span>
-
-  <div id="map" style="width: 100%; height: 100% margin: 0 auto;" class = "icon"></div>
- 
-  	
-    
-    
-<center>		
-
-    <div>
-        <form id='select-input' method='post' action='index'>
-              <p>
-                Month   <select type='text' name='month' > 
-                			{% for m in month_list %}
-                			{% if m == month %}
-                			<option value = "{{m}}" selected>{{m}}</option>
-                			{% else %}
-                			<option value = "{{m}}" >{{m}}</option>
-                			{% endif %}
-                		{% endfor %}
-                		</select>
-
-                Weekday   <select type='text' name='day' >
-                		{% for d in day_list %}
-                			{% if d == day %}
-                			<option value = "{{d}}" selected>{{d}}</option>
-                			{% else %}
-                			<option value = "{{d}}" >{{d}}</option>
-                			{% endif %}
-                		{% endfor %}
-                	</select>
-               	</p>
-               <p>
-                Time  <select type='text' name='time' >
-                		{% for t in time_list %}
-                			{% if t == time %}
-                			<option value = "{{t}}" selected>{{t}}</option>
-                			{% else %}
-                			<option value = "{{t}}" >{{t}}</option>
-                			{% endif %}
-                		{% endfor %}
-                	</select>
-              
-              </p>
-          <p>
-            <input type='submit' value='Submit' />
-            </p>
-          </form>
+	   </div>
 
     </div>
-    </center>
-   </span>
+
+
+    <span id = "blackwrap">
+      <center>
+      <div style="width:100%; height:100%; background-image:url('static/img/video_back.jpg'); background-repeat: no-repeat; background-size:cover"> 
+	    <video width="750" height="500" controls loop>
+
+          <source src="static/clips/taxi_half.mp4" type="video/mp4">
+  
+           Your browser does not support the video tag.
+
+         </video>
+         </div>
+      </center>
+    </span>
+
    
-   
+
+     <div  id="dbscan" name="dbscan">
+     	<br>
+
+     	<br>
+
+	   <div id="greywrap">
+			
+	    <div class="row white">
+
+			<center>
+			   <div>
+				  <span class="icon icon-location"></span>
+
+					<h2>For Drivers</h2>	
+					<p>Where is the probability of a pick-up the highest?</p>
+
+			    </div>
+			</center>
+	
+		</div>
+
+	   </div>
+
+      </div>
+
+
+<div id = "premap"></div>
+
+    <span>
+
+
+  	<br>
+		<hr>
+		<br>
+
+
+      <div id="map" style="width: 90%; height: 100% margin: 0 auto;" class = "icon"></div>
+ 
+  	
+        
+      	
+          <form id='select-input' method='post' action='index' class = "form-inline">
+
+			    
+				<div class="form-group">
+				    
+				    <!-- <label>Month</label>
+				     -->
+				      <select class = "selectpicker form-control" name='month' title = "Month" data-size = "7"> 
+	                		  {% for m in month_list %}
+	                		{% if m == month %}
+                		   <option value = "{{month}}"  selected>{{month}}</option>
+                			{% else%}
+                			<option value = "{{m}}" >{{m}}</option>
+                			{% endif %}
+	                			
+	                		
+	                		   {% endfor %}
+	                	</select>
+			  		</div>
+
+			  
+			    
+				    <div class="form-group">
+				    
+				    <!-- <label>Weekday</label> -->
+			
+				      <select class = "selectpicker form-control" name='day' title = "Weekday" data-size = "7">
+                		   {% for d in day_list %}
+                		   {% if d == day %}
+                		   <option value = "{{d}}"  selected>{{d}}</option>
+                			{% else%}
+                			<option value = "{{d}}" >{{d}}</option>
+                			{% endif %}
+                		   {% endfor %}
+                	      </select>
+				    </div>
+
+				 
+				    <div class="form-group">
+				    <!-- <label>Time</label> -->
+				    
+				      <select class = "selectpicker form-control" name='time' title = "Time" data-size = "7" dropupAuto = "false">
+                		{% for t in time_list %}
+                			{% if t == time %}
+                		   <option value = "{{t}}"  selected>{{t}}</option>
+                			{% else%}
+                			<option value = "{{t}}" >{{t}}</option>
+                			{% endif %}
+                			
+                			
+                		{% endfor %}
+                	  </select>
+				    </div>
+
+				   
+				    	<button class="btn btn-default" type='submit' value='Submit' >Submit</button>
+				
+			
+                
+       
+          </form>
+          
+        
+      
+    </span>
+   	
+   	<div>
+	  <center>
+		<p>
+		Using data from pick-ups in 2015 we implemented a DBScan clustering algorithm, grouping by the Borough, as well as the date, since a disproportionate number of pick-ups occur in Manhattan, approximately 82%. We also used different clustering criteria for Manhattan since drop-offs occur within closer proximity of each other.
+		</p>
+	  </center>
+	</div>
+
 		<!-- ==== ABOUT ==== -->
 		
 			<!-- <div class="row white">
@@ -203,12 +343,9 @@ Your browser does not support the video tag.
 					<p>We believe ideas come from everyone, everywhere. In fact, at BlackTie, everyone within our agency walls is a designer in their own right. And there are a few principles we believe—and we believe everyone should believe—about our design craft. These truths drive us, motivate us, and ultimately help us redefine the power of design. We’re big believers in doing right by our neighbors. After all, we grew up in the Twin Cities and we believe this place has much to offer. So we do what we can to support the community we love.</p>
 				</div><!-- col-lg-6 -->
 				
-				<div >
-				<div>
-					<p>Using data from drop-offs in 2015 we implemented a DBScan clustering algorithm, grouping by the Borough, as well as the date, since a disproportionate number of drop-offs occur in Manhattan, approximately 82%. We also used different clustering criteria for Manhattan since drop-offs occur within closer proximity of each other.</p>
-				</div><!-- col-lg-6 -->
-			</div><!-- row 
-		</div><!-- container -->
+				<!-- <div> -->
+				<!-- col-lg-6 -->
+		
 		
 		<!-- ==== SECTION DIVIDER1 -->
 
@@ -221,28 +358,30 @@ Your browser does not support the video tag.
 		</section><!-- section
 		 -->
 		
+		
+ 
 		<!-- ==== SERVICES ==== -->
-		<div  id="services" name="populatiry">
-		<div id="greywrap">
+		<div  id="popularity" name="popularity">
+		  <div id="greywrap">
 			
-			<div class="row white" >
-			<center>
-				<div >
-					<span class="icon icon-bubbles"></span>
-					<h2>How popular are those latest restaurants?</h2>
-					<p>Top 40 restaurants categorized by the number of dropoffs.</p>
-				</div><!-- col-lg-4 -->	
-			</center>
-				
-			</div><!-- row -->
-			
-		</div><!-- greywrap -->
+		    <div class="row white" >
+				<center>
+				  <div>
 
-<div>
-<center>
-<img src ="https://raw.githubusercontent.com/TrevorRempel/Data-Incubator/master/Figures/RestMapSize2.png" height="500px">
-</center>
-</div>
+					<span class="icon icon-bubbles"></span>
+					<h2>For Consumers</h2>
+					<p>Collection of 160 restaurants categorized by number of dropoffs</p>
+
+				  </div>
+				</center>
+				
+			</div>
+		  </div>
+		</div>
+		<br>
+		<hr>
+		<br>
+		<div id="map2" style="width: 90%; height: 100% margin: 0 auto;" class = "icon"></div>
 		<!-- <div class="container"  name="services">
 			<br>
 			<br>
@@ -281,25 +420,27 @@ Your browser does not support the video tag.
 
 		<!-- ==== TEAM MEMBERS ==== -->
 
-		<div  id="team" name="average">
-		<div id="greywrap">
-			
-			<div class="row white" >
-			<center>
-				<div >
-					<span class="icon icon-sigma"></span>
-					<h2>A look at the average trends.</h2>
-					<p>Busiest time of the day, most frequent tip amount, and more.</p>
-				</div><!-- col-lg-4 -->	
-			</center>
+		<div  id="average" name="average">
+			<div id="greywrap">
 				
-			</div><!-- row -->
-			
-		</div><!-- greywrap -->
-<div>
-<img src = "https://raw.githubusercontent.com/TrevorRempel/Data-Incubator/master/Figures/newyorkers.png" />
-</div>
-</div>
+				<div class="row white" >
+					<center>
+						<div >
+							<span class="icon icon-sigma"></span>
+							<h2>A look at the average trends.</h2>
+							<p>Busiest time of the day, most frequent tip amount, and more.</p>
+						</div><!-- col-lg-4 -->	
+					</center>
+					
+				</div><!-- row -->
+				
+			</div><!-- greywrap -->
+
+			<div>
+				<img src = "https://raw.githubusercontent.com/TrevorRempel/Data-Incubator/master/Figures/newyorkers.png" />
+			</div>
+
+		</div>
 		<!-- <div class="container" id="team" name="team">
 		<br>
 			<div class="row white centered">
@@ -378,23 +519,25 @@ Your browser does not support the video tag.
 			</div><!-- container 
 		<!-- </section> 
 		<!-- ==== PORTFOLIO ==== -->
-		<div  id="portfolio" name="algorithim">
-		<div id="greywrap">
-			
-			<div class="row white" >
-			<center>
-				<div >
-					<span class="icon icon-loop"></span>
-					<h2>Clustering Algorithms</h2>
-					<p>A brief overview of the clustering algorithm used.</p>
-				</div><!-- col-lg-4 -->	
-			</center>
-				
-			</div><!-- row -->
-			
-		</div><!-- greywrap -->
+		<div  id="explain" name="explain">
 
-</div>
+			<div id="greywrap">
+				
+				<div class="row white">
+
+					<center>
+						<div >
+							<span class="icon icon-loop"></span>
+								<h2>Clustering Algorithms</h2>
+							<p>A brief overview of the clustering algorithm used.</p>
+						</div><!-- col-lg-4 -->	
+					</center>
+					
+				</div><!-- row -->
+				
+			</div><!-- greywrap -->
+
+		</div>
 <!--
 		<div class="container" id="portfolio" name="portfolio">
 		<br>
@@ -574,36 +717,41 @@ Your browser does not support the video tag.
 			<br>
 		</div> ==== SECTION DIVIDER6 ==== -->
 		<section class="section-divider textdivider divider6">
+
 			<div class="container">
+
 				<h1>CRAFTED IN NEW YORK, USA.</h1>
+
 				<hr>
-				<!-- <p>Some Address 987,</p>
-				<p>+34 9884 4893</p> -->
-				<!-- <p><a class="icon icon-twitter" href="#"></a> | <a class="icon icon-facebook" href="#"></a></p> -->
+				
 			</div><!-- container -->
+
 		</section><!-- section -->
 		
 		<div class="container" id="contact" name="contact">
+
 			<div class="row">
+
 			<br>
+
 				<h1 class="centered"></h1>
 				<hr>
 				<br>
 				<br>
 				
 				<div>
-				<center>
-				<h1>Contact Information</h1>
-					<p>
+				  <center>
+				    <h1>Contact Information</h1>
+					 <p>
 					<!-- <span class="icon icon-home"></span> Some Address 987, NY<br/>
 						<span class="icon icon-phone"></span> +34 9884 4893 <br/>
 						<span class="icon icon-mobile"></span> +34 59855 9853 <br/> -->
-						<span class="icon icon-envelop"></span> <a href="trevor.rempel@mg.thedataincubator.com"> @mg.thedataincubator.com </a> <br/>
-						<span class="fa fa-linkedin"></span> <a href="https://ca.linkedin.com/in/tjrempel"> tjrempel </a><br/>
+						 <span class="icon icon-envelop"></span> <a href="trevor.rempel@mg.thedataincubator.com"> @mg.thedataincubator.com </a> <br/>
+						 <span class="fa fa-linkedin"></span> <a href="https://ca.linkedin.com/in/tjrempel"> tjrempel </a><br/>
 						
-						<span class="icon icon-github"></span> <a href="https://github.com/TrevorRempel/"> TrevorRempel </a> <br/>
-					</p>
-					</center>
+						 <span class="icon icon-github"></span> <a href="https://github.com/TrevorRempel/"> TrevorRempel </a> <br/>
+					 </p>
+				  </center>
 				</div>		
 				
 				<!-- div class="col-lg-4">
@@ -649,29 +797,40 @@ Your browser does not support the video tag.
 		</div> -->
 
   <script>
-      var center = {{center |safe}};
+
+      
       var lat_list = {{plot_lat |tojson}};
       var lng_list = {{plot_lng |tojson}};
-      // var test_lng = lng_list[0]
+      var lat_Rest = {{lat_Rest |tojson}};
+      var lng_Rest = {{lng_Rest |tojson}};
+      var names = {{names |tojson}}
+      var web = {{web |tojson}}
+      var counts = {{counts | tojson}};
       var map;
   
-      function initMap() {
-        
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: center[0], lng: center[1]},
+      function initMap() 
+
+      {
+      	var nyc_center = new google.maps.LatLng(40.6939206199602,-73.9383529238219);
+      	var nyc_center_rest = new google.maps.LatLng(40.7439206199602,-73.9383529238219);
+
+      	var options = {
+
+          center: nyc_center,
           zoom: 11,
           scrollwheel: false  
+        };
 
-        });
-      
+        var options2 = {
 
+          center: nyc_center_rest,
+          zoom: 12,
+          scrollwheel: false  
+        };
+        var styles = [{"featureType":"all","elementType":"all","stylers":[{"invert_lightness":true},{"saturation":"0"},{"lightness":"33"},{"gamma":0.5},{"hue":"#f7b731"},{"weight":"0.51"}]},{"featureType":"transit.station.rail","elementType":"labels.text","stylers":[{"gamma":"1.00"}]},{"featureType":"transit.station.rail","elementType":"labels.text.fill","stylers":[{"hue":"#ff0000"},{"lightness":"42"}]},{"featureType":"transit.station.rail","elementType":"labels.icon","stylers":[{"hue":"#ff0000"},{"invert_lightness":true},{"lightness":"-15"},{"saturation":"31"}]}];
         
-
-
-        map.set('styles', [{"featureType":"all","elementType":"all","stylers":[{"invert_lightness":true},{"saturation":"0"},{"lightness":"33"},{"gamma":0.5},{"hue":"#f7b731"},{"weight":"1.51"}]},{"featureType":"transit.station.rail","elementType":"labels.text","stylers":[{"gamma":"1.00"}]},{"featureType":"transit.station.rail","elementType":"labels.text.fill","stylers":[{"hue":"#ff0000"},{"lightness":"42"}]},{"featureType":"transit.station.rail","elementType":"labels.icon","stylers":[{"hue":"#ff0000"},{"invert_lightness":true},{"lightness":"-15"},{"saturation":"31"}]}]);
-
-        
-        var image = {
+        var image = 
+        {
 		    url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
 		    // This marker is 20 pixels wide by 32 pixels high.
 		    size: new google.maps.Size(25, 25),
@@ -680,25 +839,90 @@ Your browser does not support the video tag.
 		    // The anchor for this image is the base of the flagpole at (0, 32).
 		    anchor: new google.maps.Point(0, 32)
 
-		  };
+		};
+
+		var image2 = 
+        {
+		    url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+		    // This marker is 20 pixels wide by 32 pixels high.
+		    size: new google.maps.Size(10, 10),
+		    // The origin for this image is (0, 0).
+		    origin: new google.maps.Point(0, 0),
+		    // The anchor for this image is the base of the flagpole at (0, 32).
+		    anchor: new google.maps.Point(0, 32)
+
+		};
+
+		
+
+        map = new google.maps.Map(document.getElementById('map'), options);
+        map.set('styles', styles);
+
+        map2 = new google.maps.Map(document.getElementById('map2'), options2);
+        map2.set('styles',styles);
+      
+ 
+        
+        
+        
+        if (lat_list != null){
 
         for (i = 0; i < lat_list.length; i++)
+
         {
             var title = i.toString()
             var position = new google.maps.LatLng(Number(lat_list[i]),Number(lng_list[i]));
-            
             marker = new google.maps.Marker({position:position, icon:image,map:map});
-        }
+        };
+    }
+
+
+    	
+
+    	var infowindow = new google.maps.InfoWindow();
+    	for (i = 0; i < counts.length; i++)
+
+        {
+        	
+        	var position = new google.maps.LatLng(Number(lat_Rest[i]),Number(lng_Rest[i]));
+        	var service = new google.maps.places.PlacesService(map2);
+        	var circ = new google.maps.Circle({
+		          	clickable: true,
+		            strokeColor: '#FF0000',
+		            strokeOpacity: 0.8,
+		            strokeWeight: 0,
+		            fillColor: '#FF0000',
+		            fillOpacity: 0.50,
+		            map: map2,
+		            center: position,
+		            radius: Number(counts[i]) * 100,
+		          });
+        	
+								// '&nbsp; &nbsp; ' + place.rating 
+	       //                      + '</h5><p>' + place.formatted_address + '<br />' + place.formatted_phone_number + '<br />' + 
+        	// window.alert( place["name"])
+        	circ.content = '<span style="padding: 0px; text-align:left" align="left"><h5>' + names[i]+ '</br>'+ 
+	                            '<a  target="_blank" href=' + web[i] + '>' + web[i] + '</a></p>';
+        	
+	        google.maps.event.addListener(circ, 'click', function() {
+	              infowindow.setPosition(this.getCenter());
+	              infowindow.setContent(this.content);
+	              infowindow.open(map2, this);
+	            });
+
+	        
+           // var title = i.toString()
+          	
+          	//var marker = new google.maps.Marker({position:position, icon:image2,map:map2});
+            // Add the circle for this city to the map.
+        };
     
-      }
-
- 
-      
+          };
 
     </script>
-    <script async defer
-    src={{src|safe}}>
-    </script>
+
+    <script async defer src={{src|safe}} > </script>
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -709,5 +933,7 @@ Your browser does not support the video tag.
 	<script type="text/javascript" src="static/js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="static/js/smoothscroll.js"></script>
 	<script type="text/javascript" src="static/js/jquery-func.js"></script>
+
   </body>
+
 </html>
