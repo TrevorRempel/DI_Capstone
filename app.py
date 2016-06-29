@@ -30,12 +30,13 @@ def get_Rest_Data():
 	counts = map(str,dfRest["scaled"].values)
 	name = map(str,dfRest["name"].values)
 	web = map(str,dfRest["website"].values)
+	info = dfRest["info"]
 
-	return lat_Rest,lng_Rest, counts,name,web
+	return lat_Rest,lng_Rest, counts,name,web,info
 
 
-lat_Rest,lng_Rest,counts,names,web = get_Rest_Data()
-print names[0], lat_Rest[0],lng_Rest[0]
+lat_Rest,lng_Rest,counts,names,web,info = get_Rest_Data()
+#info = [json.dumps(item) for item in info]
 
 # relevant_keys = ['name','rating','formatted_address','formatted_phone_number','website']
 
@@ -76,7 +77,7 @@ def index():
 
 		return render_template('index.html',src = app.SRC,plot_lat = lat,\
 			plot_lng = lng, month = month_today, day = day_today, time = time_today, time_list = range(24), month_list = months_list,\
-			day_list = days_list, lat_Rest = lat_Rest,lng_Rest = lng_Rest,counts = counts,names = names,web = web)
+			day_list = days_list, lat_Rest = lat_Rest,lng_Rest = lng_Rest,counts = counts,names = names,web = web, info = info)
 	if request.method == 'POST':
 		#dd = request.form.get("date_input")
 		#year = int(request.form.get("year"))
