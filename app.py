@@ -4,7 +4,6 @@ import json
 import os
 import re
 import googlemaps
-import shapely
 import math
 import dill
 import matplotlib
@@ -117,7 +116,7 @@ def index():
 				poly_info = dill.load(f)[(month_val,day_val,time)]
 			poly = []
 			for polygon in poly_info["poly"].values:
-				lng, lat = polygon.exterior.xy
+				lng, lat = polygon
 				poly.append([list(lng),list(lat)])
 			weight = ["{:.1f}".format(val) for val in list(poly_info["percent"].values)]
 
