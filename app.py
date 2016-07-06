@@ -4,7 +4,10 @@ import json
 import os
 import re
 import googlemaps
-import pickle
+import shapely
+import math
+import dill
+import matplotlib
 from taxi_analysis import select_values, process_lat_lng
 import datetime
 
@@ -21,21 +24,29 @@ days_list = ["Monday","Tuesday","Wednesday", "Thursday", "Friday", "Saturday", "
 months_list = ["January","February","March", "April","May", "June", "July","August", "September","October",\
 "November","December"]
 
+with open("cmap.dill", "r") as f:
+	cmap = dill.load(f)
 
-def get_Rest_Data():
-	dfRest = pd.read_csv("rest_with_info.csv")
+def get_Club_Data():
+	df = pd.read_csv("night.csv")
 	
-	lat_Rest = map(str, dfRest["Lat"].values)
-	lng_Rest = map(str,dfRest["Long"].values)
-	counts = map(str,dfRest["scaled"].values)
-	name = map(str,dfRest["name"].values)
-	web = map(str,dfRest["website"].values)
-	info = dfRest["info"]
+	lat_club = map(str, df["Lat"].values)
+	lng_club = map(str,df["Long"].values)
+	counts = map(str,df["percent"].values)
+	name = map(str,df["Name"].values)
+	vals  = [(counts[i],name[i],lat_club[i],lng_club[i]) for i in range(len(name))]
+	vals = sorted(vals)
+	counts = [val[0] for val in vals]
+	name  = [val[1] for val in vals]
+	lat_club = [val[2] for val in vals]
+	lng_club = [val[3] for val in vals]
+	# web = map(str,dfRest["website"].values)
+	# info = dfRest["info"]
 
-	return lat_Rest,lng_Rest, counts,name,web,info
+	return lat_club,lng_club, counts,name
 
 
-lat_Rest,lng_Rest,counts,names,web,info = get_Rest_Data()
+lat_club,lng_club,counts,names = get_Club_Data()
 #info = [json.dumps(item) for item in info]
 
 # relevant_keys = ['name','rating','formatted_address','formatted_phone_number','website']
@@ -48,11 +59,11 @@ lat_Rest,lng_Rest,counts,names,web,info = get_Rest_Data()
 #with open('pick.pickle', 'rb') as f:
 #	dfpick = pickle.load(f) 
 
-with open('pick.pickle', 'rb') as f:
-	dfpick = pickle.load(f)
+# with open('pick.pickle', 'rb') as f:
+# 	dfpick = pickle.load(f)
 
-with open('unfilter_pick.pickle','rb') as f:
-	dfunfilt = pickle.load(f)
+# with open('unfilter_pick.pickle','rb') as f:
+# 	dfunfilt = pickle.load(f)
 
 
 @app.route('/')
@@ -72,12 +83,13 @@ def index():
 		day_today = today.strftime("%A")
 		time_today = today.hour
 		#lat, lng = process_lat_lng(select_values(dfdrop,[app.YEAR],[month_today],[day_today],[time_today]))
-		lat = map(str,dfunfilt["pickup_lat"].values)
-		lng = map(str, dfunfilt["pickup_long"].values)
+		# lat = map(str,dfunfilt["pickup_lat"].values)
+		# lng = map(str, dfunfilt["pickup_long"].values)
+		lat,lng = None, None
 
 		return render_template('index.html',src = app.SRC,plot_lat = lat,\
 			plot_lng = lng, month = month_today, day = day_today, time = time_today, time_list = range(24), month_list = months_list,\
-			day_list = days_list, lat_Rest = lat_Rest,lng_Rest = lng_Rest,counts = counts,names = names,web = web, info = info)
+			day_list = days_list, lat_club = lat_club,lng_club = lng_club,counts = counts,names = names)
 	if request.method == 'POST':
 		#dd = request.form.get("date_input")
 		#year = int(request.form.get("year"))
@@ -90,11 +102,34 @@ def index():
 
 
 			month_val = months_list.index(month)+1
+			if month_val < 10:
+				month_str = "0"+str(month_val)
+			else:
+				month_str = str(month_val)
+
 			day_val = days_list.index(day)
-			#print month,day
+	
 			time = int(time)
 
-			lat, lng = process_lat_lng(select_values(dfpick,[app.YEAR],[month_val],[day_val],[time]))
+			
+			to_load = "new_cluster_" + month_str +".dill"
+			with open(to_load, "r") as f:
+				poly_info = dill.load(f)[(month_val,day_val,time)]
+			poly = []
+			for polygon in poly_info["poly"].values:
+				lng, lat = polygon.exterior.xy
+				poly.append([list(lng),list(lat)])
+			weight = ["{:.1f}".format(val) for val in list(poly_info["percent"].values)]
+
+			percents = [math.log(val + 1) for val in poly_info["percent"].values]
+			MAX_VAL = max(percents)+0.001
+			percents = [val/MAX_VAL for val in percents]
+			
+			colors = [matplotlib.colors.rgb2hex(cmap(val)) for val in percents]
+
+
+			lat,lng = None,None
+			# lat, lng = process_lat_lng(select_values(dfpick,[app.YEAR],[month_val],[day_val],[time]))
 		except ValueError:
 			lat, lng = None, None
 	
@@ -105,9 +140,10 @@ def index():
 		#print dd
 		#print "hello"
 
-		return render_template('index.html',scroll = 'premap', src = app.SRC,plot_lat = lat, plot_lng = lng,
+		return render_template('index2.html',scroll = 'premap', src = app.SRC,plot_lat = lat, plot_lng = lng,
 			month = month, day = day, time = time, time_list = range(24), month_list = months_list,\
-			day_list = days_list,lat_Rest = lat_Rest,lng_Rest = lng_Rest,counts = counts,names= names, web  = web)
+			day_list = days_list,lat_club = lat_club,lng_club = lng_club,counts = counts,names= names,poly = poly,colors = colors,
+			weight = weight)
 
 
 

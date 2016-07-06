@@ -797,14 +797,14 @@
 		</div> -->
 
   <script>
-
-      
+      var polygons = {{poly | tojson}};
       var lat_club = {{lat_club |tojson}};
       var lng_club = {{lng_club |tojson}};
-      var names = {{names |tojson}}
+      var colors = {{colors |tojson}};
+      var names = {{names |tojson}};
+      var weight = {{weight | tojson}};
       var counts = {{counts | tojson}};
       var map;
-  
       function initMap() 
 
       {
@@ -814,7 +814,7 @@
       	var options = {
 
           center: nyc_center,
-          zoom: 11,
+          zoom: 12,
           scrollwheel: false  
         };
 
@@ -862,7 +862,43 @@
         
         
         
+        if (polygons != null){
         
+        var infowindow_tip = new google.maps.InfoWindow();
+
+        for (i = 0; i < polygons.length; i++)
+
+        {
+        	var lngs = polygons[i][0]
+        	var lats = polygons[i][1]
+        	var poly_coords = []
+        	for (j = 0; j < lngs.length; j++)
+        	{
+        		poly_coords.push({lat:Number(lats[j]),lng:Number(lngs[j])})
+        	}
+        	var plot_poly = new google.maps.Polygon({
+	          paths: poly_coords,
+	          strokeColor: '#FF0000',
+	          strokeOpacity: 0.01,
+	          strokeWeight: 0,
+	          fillColor: colors[i],
+	          fillOpacity: 0.6
+	        });
+        	plot_poly.setMap(map);
+        	plot_poly.content = '$ ' + weight[i] + ' /min'
+        	google.maps.event.addListener(plot_poly, 'click', function(event) {
+	              infowindow.setPosition(event.latLng);
+	              infowindow.setContent(this.content);
+	              infowindow.open(map, this);
+	            });
+        	
+            // var title = i.toString()
+            // var position = new google.maps.LatLng(Number(lat_list[i]),Number(lng_list[i]));
+            // marker = new google.maps.Marker({position:position, icon:image,map:map});
+        };
+    }
+
+
     	
 
     	var infowindow = new google.maps.InfoWindow();
@@ -881,13 +917,13 @@
 		            fillOpacity: 0.50,
 		            map: map2,
 		            center: position,
-		            radius: Number(counts[i]) * 300,
+		            radius: Number(counts[i]) * 100,
 		          });
         	
 								// '&nbsp; &nbsp; ' + place.rating 
 	       //                      + '</h5><p>' + place.formatted_address + '<br />' + place.formatted_phone_number + '<br />' + 
         	// window.alert( place["name"])
-        	circ.content =  names[i];
+        	circ.content = '<span style="padding: 0px; text-align:left" align="left"><h5>' + names[i]+ '</br>';
         	// + '<a  target="_blank" href=' + web[i] + '>' + web[i] + '</a></p>';
         	
 	        google.maps.event.addListener(circ, 'click', function() {
