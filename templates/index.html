@@ -86,7 +86,20 @@
 	        background-color: #000
 	      }
 
+	      #map3 {
+	        height: 75%;
+	        width: 75%;
+	        vertical-align: middle;
+	        text-align: center;
+	        background-color: #000
+	      }
+
 	      #select-input {
+    			text-align: center;	
+    			form-inline: margin:5px 3px;
+
+			}
+		#select-club {
     			text-align: center;	
     			form-inline: margin:5px 3px;
 
@@ -106,6 +119,7 @@
 		<style type="text/css">
 			div#map { margin: 0 auto 0 auto; }
 			div#map2 { margin: 0 auto 0 auto; }
+			div#map3 { margin: 0 auto 0 auto; }
 		</style>
 
 
@@ -313,7 +327,7 @@
 				    </div>
 
 				   
-				    	<button class="btn btn-default" type='submit' value='Submit' >Submit</button>
+				    	<button class="btn btn-default" type='submit' value='Tips' >Submit</button>
 				
 			
                 
@@ -538,6 +552,37 @@
 			</div><!-- greywrap -->
 
 		</div>
+
+		<div id = "premap2"></div>
+
+    <span>
+
+
+  	<br>
+		<hr>
+		<br>
+		<div id="map3" style="width: 90%; height: 100% margin: 0 auto;" class = "icon"></div>
+
+          <form id='select-club' method='post' action='club_zipcodes' class = "form-inline">
+
+			    
+				<div class="form-group">
+				    
+				    <!-- <label>Month</label>
+				     -->
+				      <input class = "form-control" type = "text" id = 'club' name='club' value=""> 
+	             </div>	 
+
+				   
+				    	<button class="btn btn-default" type='submit' value='Club' >Submit</button>
+				
+			
+                
+       
+          </form>
+
+      </span>
+          
 <!--
 		<div class="container" id="portfolio" name="portfolio">
 		<br>
@@ -797,30 +842,31 @@
 		</div> -->
 
   <script>
-
-      
       var lat_club = {{lat_club |tojson}};
       var lng_club = {{lng_club |tojson}};
-      var names = {{names |tojson}}
-      var counts = {{counts | tojson}};
+      var club_names = {{club_names |tojson}};
+
+      var club_counts = {{club_counts | tojson}};
+      var club_urls = {{club_urls |tojson}};
       var map;
-  
+      var map2;
+      var map3;
       function initMap() 
 
       {
       	var nyc_center = new google.maps.LatLng(40.6939206199602,-73.9383529238219);
-      	var nyc_center_rest = new google.maps.LatLng(40.7439206199602,-73.9383529238219);
+      	var nyc_center_club = new google.maps.LatLng(40.7439206199602,-73.9383529238219);
 
       	var options = {
 
           center: nyc_center,
-          zoom: 11,
+          zoom: 12,
           scrollwheel: false  
         };
 
         var options2 = {
 
-          center: nyc_center_rest,
+          center: nyc_center_club,
           zoom: 12,
           scrollwheel: false  
         };
@@ -838,15 +884,30 @@
 
 		};
 
-		var image2 = 
+		var image_red = 
         {
 		    url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
 		    // This marker is 20 pixels wide by 32 pixels high.
-		    size: new google.maps.Size(10, 10),
+		    size: new google.maps.Size(15, 15),
 		    // The origin for this image is (0, 0).
 		    origin: new google.maps.Point(0, 0),
 		    // The anchor for this image is the base of the flagpole at (0, 32).
-		    anchor: new google.maps.Point(0, 32)
+		    anchor: new google.maps.Point(0, 32),
+
+		    scaledSize: new google.maps.Size(15, 15)
+
+		};
+		var image_blue = 
+        {
+		    url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+		    // This marker is 20 pixels wide by 32 pixels high.
+		    size: new google.maps.Size(15, 15),
+		    // The origin for this image is (0, 0).
+		    origin: new google.maps.Point(0, 0),
+		    // The anchor for this image is the base of the flagpole at (0, 32).
+		    anchor: new google.maps.Point(0, 32),
+
+		    scaledSize: new google.maps.Size(15, 15)
 
 		};
 
@@ -857,16 +918,20 @@
 
         map2 = new google.maps.Map(document.getElementById('map2'), options2);
         map2.set('styles',styles);
+
+        map3 = new google.maps.Map(document.getElementById('map3'), options2);
+        map3.set('styles',styles);
       
  
         
         
-        
-        
+       
+
+
     	
 
-    	var infowindow = new google.maps.InfoWindow();
-    	for (i = 0; i < counts.length; i++)
+    	var infowindow_club = new google.maps.InfoWindow();
+    	for (i = 0; i < club_counts.length; i++)
 
         {
         	
@@ -881,19 +946,19 @@
 		            fillOpacity: 0.50,
 		            map: map2,
 		            center: position,
-		            radius: Number(counts[i]) * 300,
+		            radius: Number(club_counts[i]) * 300,
 		          });
         	
 								// '&nbsp; &nbsp; ' + place.rating 
 	       //                      + '</h5><p>' + place.formatted_address + '<br />' + place.formatted_phone_number + '<br />' + 
         	// window.alert( place["name"])
-        	circ.content =  names[i];
+        	circ.content = '<a  target="_blank" href=' + club_urls[i] + '>' + club_names[i] + '</a>';
         	// + '<a  target="_blank" href=' + web[i] + '>' + web[i] + '</a></p>';
         	
 	        google.maps.event.addListener(circ, 'click', function() {
-	              infowindow.setPosition(this.getCenter());
-	              infowindow.setContent(this.content);
-	              infowindow.open(map2, this);
+	              infowindow_club.setPosition(this.getCenter());
+	              infowindow_club.setContent(this.content);
+	              infowindow_club.open(map2, this);
 	            });
 
 	        
@@ -902,7 +967,44 @@
           	//var marker = new google.maps.Marker({position:position, icon:image2,map:map2});
             // Add the circle for this city to the map.
         };
-    
+
+        var infowindow_club2 = new google.maps.InfoWindow();
+        var clicked = new google.maps.Marker({customInfo:"not clicked"});
+    	for (i = 0; i < club_counts.length; i++)
+
+        {
+
+        	var position = new google.maps.LatLng(Number(lat_club[i]),Number(lng_club[i]));
+
+        	var marker = new google.maps.Marker({
+	          position: position,
+	          map: map3,
+	          icon: image_red,
+	          clickable:true,
+	          customInfo: '<a  target="_blank" href=' + club_urls[i] + '>' + club_names[i] + '</a>',
+	          title: club_names[i]
+        		});
+
+        	
+        	
+	        google.maps.event.addListener(marker, 'mouseover', function() {
+	              infowindow_club2.setPosition(this.position);
+	              infowindow_club2.setContent(this.customInfo);
+	              infowindow_club2.open(map3, this);
+	              // this.setIcon(image_blue);
+	            });
+			google.maps.event.addListener(marker, 'click', function() {
+				  if (clicked.customInfo !="not clicked" && clicked != this){
+				  clicked.setIcon(image_red)
+				  }	
+	              this.setIcon(image_blue);
+	              clicked = this;
+	              document.getElementById('club').value = clicked.title;
+
+	            });	     
+
+			
+	      };
           };
 
     </script>

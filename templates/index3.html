@@ -563,24 +563,24 @@
 		<br>
 		<div id="map3" style="width: 90%; height: 100% margin: 0 auto;" class = "icon"></div>
 
-          <form id='select-club' method='post' action='club_zipcodes' class = "form-inline">
+          <form id='select-club' method='post' action='index' class = "form-inline">
 
 			    
 				<div class="form-group">
 				    
 				    <!-- <label>Month</label>
 				     -->
-				      <input class = "form-control" type = "text" id = 'club' name='club' value=""> 
+				      <input class = "form-control" type = "text" id = 'reset_club' name='reset_club' value=""> 
 	             </div>	 
 
 				   
-				    	<button class="btn btn-default" type='submit' value='Club' >Submit</button>
+				    	<button class="btn btn-default" type='submit' value='Club' id='reset_club'>Reset</button>
+				    	
 				
 			
                 
        
           </form>
-
       </span>
           
 <!--
@@ -852,6 +852,11 @@
 
       var club_counts = {{club_counts | tojson}};
       var club_urls = {{club_urls |tojson}};
+
+      var club_poly = {{club_poly |tojson}};
+      var club_weight = {{club_weight |tojson}};
+      var club_colors = {{club_colors |tojson}};
+      var cur_info = {{cur_info|tojson}};
       var map;
       var map2;
       var map3;
@@ -1008,43 +1013,48 @@
         };
 
         var infowindow_club2 = new google.maps.InfoWindow();
-        var clicked = new google.maps.Marker({customInfo:"not clicked"});
-    	for (i = 0; i < club_counts.length; i++)
-
-        {
-
-        	var position = new google.maps.LatLng(Number(lat_club[i]),Number(lng_club[i]));
-
-        	var marker = new google.maps.Marker({
-	          position: position,
+        var club_position = new google.maps.LatLng(Number(cur_info[0]),Number(cur_info[1]));
+        var club_marker = new google.maps.Marker({
+	          position: club_position,
 	          map: map3,
-	          icon: image_red,
+	          icon: image_blue,
 	          clickable:true,
-	          customInfo: '<a  target="_blank" href=' + club_urls[i] + '>' + club_names[i] + '</a>',
-	          title: club_names[i]
+	          // customInfo: '<a  target="_blank" href=' + club_urls[i] + '>' + club_names[i] + '</a>',
+	          title: cur_info[2]
         		});
 
-        	
-        	
-	        google.maps.event.addListener(marker, 'mouseover', function() {
-	              infowindow_club2.setPosition(this.position);
-	              infowindow_club2.setContent(this.customInfo);
+        for (i = 0; i < club_poly.length; i++)
+
+        {
+        	var lngs = club_poly[i][0];
+        	var lats = club_poly[i][1];
+        	var poly_coords = [];
+        	for (j = 0; j < lngs.length; j++)
+        	{
+        		poly_coords.push({lat:Number(lats[j]),lng:Number(lngs[j])})
+        	}
+        	var plot_poly = new google.maps.Polygon({
+	          paths: poly_coords,
+	          strokeColor: '#000000',
+	          strokeOpacity: 0.75,
+	          strokeWeight: 0.5,
+	          fillColor: club_colors[i],
+	          fillOpacity: 0.6
+	        });
+        	plot_poly.setMap(map3);
+        	plot_poly.content = club_weight[i];
+        	google.maps.event.addListener(plot_poly, 'click', function(event) {
+	              infowindow_club2.setPosition(event.latLng);
+	              infowindow_club2.setContent(this.content);
 	              infowindow_club2.open(map3, this);
-	              // this.setIcon(image_blue);
 	            });
-			google.maps.event.addListener(marker, 'click', function() {
-				  if (clicked.customInfo !="not clicked" && clicked != this){
-				  clicked.setIcon(image_red)
-				  }	
-	              this.setIcon(image_blue);
-	              clicked = this;
-	              document.getElementById('club').value = clicked.title;
-
-	            });	     
-
-			
-	      };
-          };
+        	document.getElementById('reset_club').value = cur_info[2];
+        	
+            // var title = i.toString()
+            // var position = new google.maps.LatLng(Number(lat_list[i]),Number(lng_list[i]));
+            // marker = new google.maps.Marker({position:position, icon:image,map:map});
+        };
+      };
 
     </script>
 
