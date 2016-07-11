@@ -144,37 +144,41 @@ def club_zipcodes():
 
 	club = request.form.get('club')
 
+	if club:
 
-	grid = dfClub[dfClub["Name_Yelp"] == club]["grid"].values[0]
-	# print dfClub[dfClub["Name_Yelp"] == club][["Lat","Long"]].values
-	cur_lat,cur_lng = dfClub[dfClub["Name_Yelp"] == club][["Lat","Long"]].values[0]
 
-	l,r = grid.split(",")
-	grid_point = (int(l[1:]),int(r[:-1]))
-	zips = zip_club[grid_point]
+		grid = dfClub[dfClub["Name_Yelp"] == club]["grid"].values[0]
+		# print dfClub[dfClub["Name_Yelp"] == club][["Lat","Long"]].values
+		cur_lat,cur_lng,cur_url = dfClub[dfClub["Name_Yelp"] == club][["Lat","Long","url"]].values[0]
 
-	club_poly = []
-	club_percent = []
-	club_weight = []
-	for zip_code, weight in zips.items():
-		if zip_code != 11371 and zip_code !=11430:
-			for poly in zip_polys[zip_code]:
-				lng,lat = poly
-				club_poly.append([list(lng),list(lat)])
-				club_percent.append(weight)
-				club_weight.append(zip_code)
+		l,r = grid.split(",")
+		grid_point = (int(l[1:]),int(r[:-1]))
+		zips = zip_club[grid_point]
 
-	club_weight = map(str,map(int,club_weight))
-	club_colors = [matplotlib.colors.rgb2hex(cmap(val)) for val in club_percent]
-	scroll = 'club_map'
-	to_render = 'index3.html'
-	return render_template(to_render,scroll = scroll, src = app.SRC,
-			month = month, day = day, time = time, time_list = range(24), month_list = months_list,\
-			day_list = days_list,lat_club = lat_club,lng_club = lng_club,club_counts = club_counts,club_names= club_names,\
-			tip_poly = app.tip_poly,tip_colors = app.tip_colors,
-			tip_weight = app.tip_weight,club_urls = club_urls,club_weight = club_weight,club_colors = club_colors,club_poly = club_poly,\
-			cur_info = [cur_lat, cur_lng,club])
+		club_poly = []
+		club_percent = []
+		club_weight = []
+		for zip_code, weight in zips.items():
+			zip_code = int(zip_code)
+			if zip_code != 11371 and zip_code !=11430:
+				for poly in zip_polys[zip_code]:
+					lng,lat = poly
+					club_poly.append([list(lng),list(lat)])
+					club_percent.append(weight)
+					club_weight.append(zip_code)
 
+		club_weight = map(str,map(int,club_weight))
+		club_colors = [matplotlib.colors.rgb2hex(cmap(val)) for val in club_percent]
+		scroll = 'club_map'
+		to_render = 'index3.html'
+		return render_template(to_render,scroll = scroll, src = app.SRC,
+				month = month, day = day, time = time, time_list = range(24), month_list = months_list,\
+				day_list = days_list,lat_club = lat_club,lng_club = lng_club,club_counts = club_counts,club_names= club_names,\
+				tip_poly = app.tip_poly,tip_colors = app.tip_colors,
+				tip_weight = app.tip_weight,club_urls = club_urls,club_weight = club_weight,club_colors = club_colors,club_poly = club_poly,\
+				cur_info = [cur_lat, cur_lng,club,cur_url])
+	else:
+		return redirect('/index#club_map')
 
 
 if __name__ == '__main__':

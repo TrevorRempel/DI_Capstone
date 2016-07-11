@@ -109,10 +109,8 @@
     .btn:focus {
   		outline: #f7b731;
   		border-color: #f7b731;
-  		/*background-color:#000000;
-  		color:#f7b731;*/
 	}
-	 /*body { background: #f7b731 !important; }*/
+	 
 	</style>
 
 
@@ -162,10 +160,10 @@
 
               <li><a href="#home" class="smoothScroll">Home</a></li>
               <li> <a href="#heartbeat" class="smoothScroll">Heartbeat of City</a></li>
-			  <li> <a href="#dbscan" class="smoothScroll"> Drivers</a></li>
-			  <li> <a href="#popularity" class="smoothScroll"> Consumers</a></li>
-			  <!-- <li> <a href="#average" class="smoothScroll">NYC on Average</a></li> -->
-			  <li> <a href="#explain" class="smoothScroll">DBScan</a></li>
+			  <li> <a href="#tips" class="smoothScroll"> Drivers</a></li>
+			  <li> <a href="#pop_clubs" class="smoothScroll"> Club Goers</a></li>
+			  <li> <a href="#club_owner" class="smoothScroll">Club Owners</a></li>
+			  <li> <a href="#banker" class="smoothScroll">Bankers</a></li>
 			  <li> <a href="#contact" class="smoothScroll"> Contact</a></li>
 
 		     </ul>
@@ -231,7 +229,7 @@
 
    
 
-     <div  id="dbscan" name="dbscan">
+     <div  id="tips" name="tips">
      	<br>
 
      	<br>
@@ -245,7 +243,7 @@
 				  <span class="icon icon-location"></span>
 
 					<h2>For Drivers</h2>	
-					<p>Where is the probability of a pick-up the highest?</p>
+					<p>Where should a driver go to maximize earnings?</p>
 
 			    </div>
 			</center>
@@ -337,45 +335,23 @@
         
       
     </span>
-   	
+   	<hr>
    	<div>
 	  <center>
 		<p>
-		Using data from pick-ups in 2015 we implemented a DBScan clustering algorithm, grouping by the Borough, as well as the date, since a disproportionate number of pick-ups occur in Manhattan, approximately 82%. We also used different clustering criteria for Manhattan since drop-offs occur within closer proximity of each other.
+		For a given month, day of the week and time of the time we gather the areas with highest customer concentration. These areas are obtained by applying a DBSCAN clustering algorithim to the pickup data for the selected time. Each group is then colored based on the expected earnings from pickups in that area, where we use total fare / trip duration as an earnings metric.
 		</p>
 	  </center>
 	</div>
 
-		<!-- ==== ABOUT ==== -->
-		
-			<!-- <div class="row white">
-			<br>
-				<h1 class="centered">A LITTLE ABOUT OUR AGENCY</h1>
-				<hr>
-				
-				<div class="col-lg-6">
-					<p>We believe ideas come from everyone, everywhere. In fact, at BlackTie, everyone within our agency walls is a designer in their own right. And there are a few principles we believe—and we believe everyone should believe—about our design craft. These truths drive us, motivate us, and ultimately help us redefine the power of design. We’re big believers in doing right by our neighbors. After all, we grew up in the Twin Cities and we believe this place has much to offer. So we do what we can to support the community we love.</p>
-				</div><!-- col-lg-6 -->
-				
-				<!-- <div> -->
-				<!-- col-lg-6 -->
-		
-		
-		<!-- ==== SECTION DIVIDER1 -->
-
-		<!-- <section class="section-divider textdivider divider1">
-			<div class="container">
-				<h1>DESIGN EXPAND BOUNDARIES</h1>
-				<hr>
-				<p>To achieve real change, we have to expand boundaries. Because the Wild West of what-could-be is unexplored but rife with opportunity.</p>
-			</div><!-- container 
-		</section><!-- section
-		 -->
 		
 		
  
-		<!-- ==== SERVICES ==== -->
-		<div  id="popularity" name="popularity">
+		<!-- ==== Night Clubs ==== -->
+		<div  id="pop_clubs" name="pop_clubs">
+		<br>
+
+     	<br>
 		  <div id="greywrap">
 			
 		    <div class="row white" >
@@ -383,8 +359,8 @@
 				  <div>
 
 					<span class="icon icon-bubbles"></span>
-					<h2>For Consumers</h2>
-					<p>Collection of 190 nightclubs categorized by number of dropoffs</p>
+					<h2>For Club Goers</h2>
+					<p>150 nightclubs categorized by number of dropoffs</p>
 
 				  </div>
 				</center>
@@ -396,144 +372,19 @@
 		<hr>
 		<br>
 		<div id="map2" style="width: 90%; height: 100% margin: 0 auto;" class = "icon"></div>
-		<!-- <div class="container"  name="services">
-			<br>
-			<br>
-			<div class="row">
-				<h2 class="centered">ONE BRAND, ONE VOICE.</h2>
-				<hr>
-				<br>
-				<div class="col-lg-offset-2 col-lg-8">
-					<p>Employees and consumers. Two halves of a brand’s entirety, the whole of a brand’s audience. Sometimes these two halves have very different viewpoints, creating a weak spot in the brand story. Weakness tarnishes credibility. Brands that aren’t credible aren’t viable.
-					</p>
-					<p>We squash weakness by designing the whole brand story. It’s crafted around the truism held by employees and consumers to create an experience that connects from the inside out.</p>
-					<p>By being true to the brand we represent, we elevate the audiences’ relationship to it. Like becomes love becomes a passion. Passion becomes advocacy. And we see the brand blossom from within, creating a whole story the audience embraces. That’s when the brand can truly flex its muscles.</p>
-				</div><!-- col-lg
-			</div><!-- row
-			
-			<div class="row">
-				<h2 class="centered">MOBILE FIRST THINKING, ALWAYS.</h2>
-				<hr>
-				<br>
-				<div class="col-lg-offset-2 col-lg-8">
-					<img class="img-responsive" src="static/img/iphone.png" alt="">
-				</div><!-- col
-			</div><!-- row -->
-		<!-- </div> -->
-		<!-- container --> 
-  		
+		<hr>
+		<div>
+	  <center>
+		<p>
+		After collecting the names and locations of popular night clubs in NYC we examined the number of dropoffs occuring at these locations between 12am and 4am on Friday and Saturday nights. Presumaby the people using cabs to get to these locations at this time of night are likely attending a club, and so the number of dropoffs can be used as an unbiased metric for how many people are attending these venues. 
+		</p>
+	  </center>
+	</div>
 
-		<!-- ==== SECTION DIVIDER2 -->
-		<!-- <section class="section-divider textdivider divider2">
-			<div class="container">
-				<h1>DESIGN IS AN INTERACTION</h1>
-				<hr>
-				<p>To develop a deeper and more meaningful connection with consumers, we believe design must invite them to take part in the conversation.</p>
-			</div><!-- container 
-		</section><!-- section  -->
-
-		<!-- ==== TEAM MEMBERS ==== -->
-
-		<!-- <div  id="average" name="average">
-			<div id="greywrap">
-				
-				<div class="row white" >
-					<center>
-						<div >
-							<span class="icon icon-sigma"></span>
-							<h2>A look at the average trends.</h2>
-							<p>Busiest time of the day, most frequent tip amount, and more.</p> -->
-						<!-- </div>
-					</center>
-					
-				</div>
-				
-			</div>
-
-			<div>
-				<img src = "https://raw.githubusercontent.com/TrevorRempel/Data-Incubator/master/Figures/newyorkers.png" />
-			</div>
-
-		</div> -->
-		<!-- <div class="container" id="team" name="team">
+	<div  id="club_owner" name="club_owner">
+		
 		<br>
-			<div class="row white centered">
-				<h1 class="centered">MEET OUR AWESOME TEAM</h1>
-				<hr>
-				<br>
-				<br>
-				<div class="col-lg-3 centered">
-					<img class="img img-circle" src="static/img/team/team01.jpg" height="120px" width="120px" alt="">
-					<br>
-					<h4><b>Mike Arney</b></h4>
-					<a href="#" class="icon icon-twitter"></a>
-					<a href="#" class="icon icon-facebook"></a>
-					<a href="#" class="icon icon-flickr"></a>
-					<p>Mike combines an expert technical knowledge with a real eye for design. Working with clients from a wide range of industries, he fully understands client objectives when working on a project, large or small.</p>
-				</div><!-- col-lg-3 
-				
-				<div class="col-lg-3 centered">
-					<img class="img img-circle" src="static/img/team/team02.jpg" height="120px" width="120px" alt="">
-					<br>
-					<h4><b>Tim Davies</b></h4>
-					<a href="#" class="icon icon-twitter"></a>
-					<a href="#" class="icon icon-facebook"></a>
-					<a href="#" class="icon icon-flickr"></a>
-					<p>Tim is an experienced marcoms practitioner and manages projects from inception to delivery. He understands the synergy between great design and commercial effectiveness which shines through on every project.</p>
-				</div><!-- col-lg-3 
-				
-				<div class="col-lg-3 centered">
-					<img class="img img-circle" src="static/img/team/team03.jpg" height="120px" width="120px" alt="">
-					<br>
-					<h4><b>Michele Lampa</b></h4>
-					<a href="#" class="icon icon-twitter"></a>
-					<a href="#" class="icon icon-facebook"></a>
-					<a href="#" class="icon icon-flickr"></a>
-					<p>Be a creative director is a hard task, but Michele loves what she does. Her combination of knowledge and expertise is an important pillar in our agency.</p>
-				</div><!-- col-lg-3 
-				
-				<div class="col-lg-3 centered">
-					<img class="img img-circle" src="static/img/team/team04.jpg" height="120px" width="120px" alt="">
-					<br>
-					<h4><b>Jaye Smith</b></h4>
-					<a href="#" class="icon icon-twitter"></a>
-					<a href="#" class="icon icon-facebook"></a>
-					<a href="#" class="icon icon-flickr"></a>
-					<p>Jaye began making websites when animated logos and scrolling text were cool, but has since found a love for simplicity, creating websites that are a pleasure to browse. Monkey Island Fan.</p>
-				</div><!-- col-lg-3 
-				
-			</div><!-- row 
-		</div><!-- container
-
-		<!-- ==== GREYWRAP ==== -->
-
-		<!-- <div id="greywrap">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 centered">
-						<img class="img-responsive" src="static/img/macbook.png" align="">
-					</div>
-					<div class="col-lg-4">
-						<h2>We Are Hiring!</h2>
-						<p>Do you want to be one of use? Sure you want, because we are an awesome team!. Here we work hard every day to craft pixel perfect sites.</p>
-						<p><a class="btn btn-success">Contact Us</a></p>
-					</div>					
-				</div><!-- row 
-			</div>
-			<br>
-			<br>
-		</div><!-- greywrap  
-		<!-- 
-		<!-- ==== SECTION DIVIDER3 -->
-		<!-- <section class="section-divider textdivider divider3">
-			<div class="container">
-				<h1>DESIGN SOLVE PROBLEMS</h1>
-				<hr>
-				<p>From the purely practical to the richly philosophical, design is the solution to a host of challenges.</p>
-			</div><!-- container 
-		<!-- </section> 
-		<!-- ==== PORTFOLIO ==== -->
-		<div  id="explain" name="explain">
+		<br>
 
 			<div id="greywrap">
 				
@@ -542,8 +393,8 @@
 					<center>
 						<div >
 							<span class="icon icon-loop"></span>
-								<h2>Clustering Algorithms</h2>
-							<p>A brief overview of the clustering algorithm used.</p>
+								<h2>For Club Owners</h2>
+							<p>Select a club to see where patrons tend to live</p>
 						</div><!-- col-lg-4 -->	
 					</center>
 					
@@ -582,190 +433,62 @@
        
           </form>
       </span>
-          
-<!--
-		<div class="container" id="portfolio" name="portfolio">
-		<br>
-			<div class="row">
-				<br>
-				<h1 class="centered">WE CREATE COOL STUFF</h1>
-				<hr>
-				<br>
-				<br>
-			</div><!-- /row 
-			<div class="container">
-			<div class="row">	
-			
-				<!-- PORTFOLIO IMAGE 1 
-				<div class="col-md-4 ">
-			    	<div class="grid mask">
-						<figure>
-							<img class="img-responsive" src="static/img/portfolio/folio01.jpg" alt="">
-							<figcaption>
-								<h5>DASHBOARD</h5>
-								<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Take a Look</a>
-							</figcaption><!-- /figcaption 
-						</figure><!-- /figure 
-			    	</div><!-- /grid-mask 
-				</div><!-- /col
-				
-				
-						 <!-- MODAL SHOW THE PORTFOLIO IMAGE. In this demo, all links point to this modal. You should create
-						      a modal for each of your projects. 
-						      
-						  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						    <div class="modal-dialog">
-						      <div class="modal-content">
-						        <div class="modal-header">
-						          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						          <h4 class="modal-title">Project Title</h4>
-						        </div>
-						        <div class="modal-body">
-						          <p><img class="img-responsive" src="static/img/portfolio/folio01.jpg" alt=""></p>
-						          <p>This project was crafted for Some Name corp. Detail here a little about your job requirements and the tools used. Tell about the challenges faced and what you and your team did to solve it.</p>
-						          <p><b><a href="#">Visit Site</a></b></p>
-						        </div>
-						        <div class="modal-footer">
-						          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						        </div>
-						      </div><!-- /.modal-content
-						    </div><!-- /.modal-dialog
-						  </div><!-- /.modal -->
-				
-				
-				<!-- PORTFOLIO IMAGE 2 
-				<div class="col-md-4">
-			    	<div class="grid mask">
-						<figure>
-							<img class="img-responsive" src="static/img/portfolio/folio02.jpg" alt="">
-							<figcaption>
-								<h5>UI DESIGN</h5>
-								<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Take a Look</a>
-							</figcaption><!-- /figcaption 
-						</figure><!-- /figure 
-			    	</div><!-- /grid-mask --
-				</div><!-- /col -->
-				
-				<!-- PORTFOLIO IMAGE 3 
-				<div class="col-md-4">
-			    	<div class="grid mask">
-						<figure>
-							<img class="img-responsive" src="static/img/portfolio/folio03.jpg" alt="">
-							<figcaption>
-								<h5>ANDROID PAGE</h5>
-								<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Take a Look</a>
-							</figcaption><!-- /figcaption 
-						</figure><!-- /figure 
-			    	</div><!-- /grid-mask 
-				</div><!-- /col 
-			</div><!-- /row 
+      <hr>
+      <center>
+		<p>
+		For each club we look at where people being dropped off/picked up at that location were coming from/going to. We then show the concentration of attendies based on zip code so club owners can have an idea of where they should be focusing their adventising efforts. 
+		</p>
+	  </center>
 
-				<!-- PORTFOLIO IMAGE 4 
-			<div class="row">	
-				<div class="col-md-4 ">
-			    	<div class="grid mask">
-						<figure>
-							<img class="img-responsive" src="static/img/portfolio/folio04.jpg" alt="">
-							<figcaption>
-								<h5>PROFILE</h5>
-								<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Take a Look</a>
-							</figcaption><!-- /figcaption 
-						</figure><!-- /figure 
-			    	</div><!-- /grid-mask 
-				</div><!-- /col 
-				
-				<!-- PORTFOLIO IMAGE 5 
-				<div class="col-md-4">
-			    	<div class="grid mask">
-						<figure>
-							<img class="img-responsive" src="static/img/portfolio/folio05.jpg" alt="">
-							<figcaption>
-								<h5>TWITTER STATUS</h5>
-								<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Take a Look</a>
-							</figcaption><!-- /figcaption 
-						</figure><!-- /figure 
-			    	</div><!-- /grid-mask 
-				</div><!-- /col
-			
-				<!-- PORTFOLIO IMAGE 6 
-				<div class="col-md-4">
-			    	<div class="grid mask">
-						<figure>
-							<img class="img-responsive" src="static/img/portfolio/folio06.jpg" alt="">
-							<figcaption>
-								<h5>PHONE MOCKUP</h5>
-								<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Take a Look</a>
-							</figcaption><!-- /figcaption 
-						</figure><!-- /figure 
-			    	</div><!-- /grid-mask 
-				</div><!-- /col
-			</div><!-- /row 
-			<br>
-			<br>
-		</div><!-- /row 
-	</div><!-- /container -->
 
-		<!-- ==== SECTION DIVIDER4 ==== -->
-		<!-- <section class="section-divider textdivider divider4">
-			<div class="container">
-				<h1>DESIGN CREATES EMOTIONAL CONNECTION</h1>
-				<hr>
-				<p>There’s more to design than meets the eye. It’s when it meets the heart that design creates a meaningful, lasting connection with the audience.</p>
-			</div><!-- container 
-		</section><!-- section 
+
+		<div  id="banker" name="banker">
 		
-		<!-- ==== BLOG ==== -->
-		<!-- <div class="container" id="blog" name="blog">
 		<br>
-			<div class="row">
-				<br>
-				<h1 class="centered">WE ARE STORYTELLERS</h1>
-				<hr>
-				<br>
-				<br>
-			</div><!-- /row 
-			
-			<div class="row">
-				<div class="col-lg-6 blog-bg">
-					<div class="col-lg-4 centered">
-					<br>
-						<p><img class="img img-circle" src="static/img/team/team04.jpg" width="60px" height="60px"></p>
-						<h4>Jaye Smith</h4>
-						<h5>Published Aug 30.</h5>
-					</div>
-					<div class="col-lg-8 blog-content">
-						<h2>We Define Success</h2>
-						<p>Armed with insight, we embark on designing the right brand experience that engages the audience. It encompasses both the strategic direction and creative execution that solves a business problem and brings the brand to life.</p>
-						<p>In the create phase, the big idea is unleashed to the world through different media touchpoints. This is when we watch the audience fall in love all over again with our client’s brand.</p>
-						<p><a href="#" class="icon icon-link"> Read More</a></p>
-						<br>
-					</div>
-				</div><!-- /col 
+		<br>
+
+			<div id="greywrap">
 				
-				<div class="col-lg-6 blog-bg">
-					<div class="col-lg-4 centered">
-					<br>
-						<p><img class="img img-circle" src="static/img/team/team03.jpg" width="60px" height="60px"></p>
-						<h4>Michele Lampa</h4>
-						<h5>Published Aug 28.</h5>
-					</div>
-					<div class="col-lg-8 blog-content">
-						<h2>A Beautiful Story</h2>
-						<p>Armed with insight, we embark on designing the right brand experience that engages the audience. It encompasses both the strategic direction and creative execution that solves a business problem and brings the brand to life.</p>
-						<p>In the create phase, the big idea is unleashed to the world through different media touchpoints. This is when we watch the audience fall in love all over again with our client’s brand.</p>
-						<p><a href="#" class="icon icon-link"> Read More</a></p>
-						<br>
-					</div>
-				</div><!-- /col 
-			</div><!-- /row 
-			<br>
-			<br>
-		</div> ==== SECTION DIVIDER6 ==== -->
+				<div class="row white">
+
+					<center>
+						<div >
+							<span class="icon icon-home3"></span>
+								<h2>Where Investment Bankers Live</h2>
+							<p>Concentration of pickups for customers dropped off at investment banks</p>
+						</div><!-- col-lg-4 -->	
+					</center>
+					
+				</div><!-- row -->
+				
+			</div><!-- greywrap -->
+
+		</div>
+
+		<div id = "bank_map"></div>
+
+    <span>
+
+
+  	<br>
+		<hr>
+		<br>
+		<iframe width="100%" height="520" frameborder="0" src="https://tjrempel87.carto.com/viz/e406c58e-4782-11e6-9c8b-0e3ff518bd15/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+
+      </span>
+      <hr>
+      <center>
+		<p>
+		Looked at dropoffs near 50 investment banks between 5am and 9am on Monday to Friday and clustered the pickup locations based on zipcode 
+		</p>
+	  </center>
+          
+
 		<section class="section-divider textdivider divider6">
 
 			<div class="container">
 
-				<h1>CRAFTED IN NEW YORK, USA.</h1>
+				<h1>BUILT IN NEW YORK, USA.</h1>
 
 				<hr>
 				
@@ -799,47 +522,13 @@
 				  </center>
 				</div>		
 				
-				<!-- div class="col-lg-4">
-					<h3>Newsletter</h3>
-					<p>Register to our newsletter and be updated with the latests information regarding our services, offers and much more.</p>
-					<p>
-						<form class="form-horizontal" role="form">
-						  <div class="form-group">
-						    <label for="inputEmail1" class="col-lg-4 control-label"></label>
-						    <div class="col-lg-10">
-						      <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <label for="text1" class="col-lg-4 control-label"></label>
-						    <div class="col-lg-10">
-						      <input type="text" class="form-control" id="text1" placeholder="Your Name">
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <div class="col-lg-10">
-						      <button type="submit" class="btn btn-success">Sign in</button>
-						    </div>
-						  </div>
-					   </form><!-- form
-					</p>
-				</div><!-- col --> 
 				
-				<!-- <div class="col-lg-4">
-					<h3>Support Us</h3>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				</div><!-- col --> 
-
 			</div><!-- row -->
 		
 		</div><!-- container -->
 
 
-		<!-- <div id="footerwrap">
-			<div class="container">
-				<h4>Created by <a href="http://blacktie.co">BlackTie.co</a> - Copyright 2014</h4>
-			</div>
-		</div> -->
+		
 
   <script>
       var tip_poly = {{tip_poly | tojson}};
@@ -865,10 +554,11 @@
       {
       	var nyc_center = new google.maps.LatLng(40.6939206199602,-73.9383529238219);
       	var nyc_center_club = new google.maps.LatLng(40.7439206199602,-73.9383529238219);
+      	var club_position = new google.maps.LatLng(Number(cur_info[0]),Number(cur_info[1]));
 
       	var options = {
 
-          center: nyc_center,
+          center: nyc_center_club,
           zoom: 12,
           scrollwheel: false  
         };
@@ -876,6 +566,13 @@
         var options2 = {
 
           center: nyc_center_club,
+          zoom: 12,
+          scrollwheel: false  
+        };
+
+        var options3 = {
+
+          center: club_position,
           zoom: 12,
           scrollwheel: false  
         };
@@ -910,13 +607,13 @@
         {
 		    url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
 		    // This marker is 20 pixels wide by 32 pixels high.
-		    size: new google.maps.Size(15, 15),
+		    size: new google.maps.Size(25, 25),
 		    // The origin for this image is (0, 0).
 		    origin: new google.maps.Point(0, 0),
 		    // The anchor for this image is the base of the flagpole at (0, 32).
 		    anchor: new google.maps.Point(0, 32),
 
-		    scaledSize: new google.maps.Size(15, 15)
+		    scaledSize: new google.maps.Size(25, 25)
 
 		};
 
@@ -928,7 +625,7 @@
         map2 = new google.maps.Map(document.getElementById('map2'), options2);
         map2.set('styles',styles);
 
-        map3 = new google.maps.Map(document.getElementById('map3'), options2);
+        map3 = new google.maps.Map(document.getElementById('map3'), options3);
         map3.set('styles',styles);
       
  
@@ -1013,15 +710,21 @@
         };
 
         var infowindow_club2 = new google.maps.InfoWindow();
-        var club_position = new google.maps.LatLng(Number(cur_info[0]),Number(cur_info[1]));
+        var infowindow_club3 = new google.maps.InfoWindow();
         var club_marker = new google.maps.Marker({
 	          position: club_position,
 	          map: map3,
 	          icon: image_blue,
 	          clickable:true,
-	          // customInfo: '<a  target="_blank" href=' + club_urls[i] + '>' + club_names[i] + '</a>',
+	          customInfo: '<a  target="_blank" href=' + cur_info[3] + '>' + cur_info[2] + '</a>',
 	          title: cur_info[2]
         		});
+        google.maps.event.addListener(club_marker, 'click', function() {
+	              infowindow_club3.setPosition(this.position);
+	              infowindow_club3.setContent(this.customInfo);
+	              infowindow_club3.open(map3, this);
+	              // this.setIcon(image_blue);
+	            });
 
         for (i = 0; i < club_poly.length; i++)
 
