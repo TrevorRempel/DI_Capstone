@@ -109,7 +109,7 @@ def index():
 		else:
 			scroll = 'nav-bar main'
 	
-
+		print app.tip_weight
 		return render_template(to_render,scroll = scroll, src = app.SRC,
 			month = month, day = day, time = time, time_list = range(24), month_list = months_list,\
 			day_list = days_list,lat_club = lat_club,lng_club = lng_club,club_counts = club_counts,club_names= club_names,\
