@@ -143,8 +143,9 @@ def club_zipcodes():
 	time = today.hour
 
 	club = request.form.get('club')
+	print club
 
-	if club in dfClub["Name_Yelp"].values:
+	if club:
 
 
 		grid = dfClub[dfClub["Name_Yelp"] == club]["grid"].values[0]
