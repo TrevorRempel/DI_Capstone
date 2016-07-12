@@ -302,6 +302,16 @@ a:after {
     font-weight: bold;
     text-shadow: 2px 2px 2px #000;
 }
+#headerwrap h3 {
+    color:#f7b731;
+    /*margin-top: 90px;
+    padding-bottom: 30px;
+*/    letter-spacing: 8px;
+    font-size: 75px;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px #000;
+}
+
 
 #headerwrap p {
     color:#ffffff;

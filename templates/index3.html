@@ -178,7 +178,8 @@
 
 	  <header class="clearfix">
 
-	    <h1><span class = "icon" >NYC - A Taxi's Perspective</span></h1>
+	    <h1><span class = "icon" >There and Back Again</span></h1>
+	    <h3><span>A Taxi's Tale</span></h3>	   
 
 	   </header>	    
 	 </div><!-- /headerwrap -->
@@ -199,7 +200,7 @@
 		    <div >
 
 			  <span class="icon icon-play"></span>
-			    <h2>NYC's Heartbeat</h2>
+			    <h2>The Road Most Taken</h2>
 
 			       <p>See the concentration of dropoffs change over the course of a day</p>
 
@@ -244,6 +245,105 @@
 
 					<h2>For Drivers</h2>	
 					<p>Where should a driver go to maximize earnings?</p>
+
+			    </div>
+			</center>
+	
+		</div>
+
+	   </div>
+
+      </div>
+
+      <div  id="banker" name="banker">
+		
+		<br>
+		<br>
+
+			<div id="greywrap">
+				
+				<div class="row white">
+
+					<center>
+						<div >
+							<span class="icon icon-home"></span>
+								<h2>Where the Investment Bankers Are</h2>
+							<p>Concentration of pickups for customers dropped off at investment banks</p>
+						</div><!-- col-lg-4 -->	
+					</center>
+					
+				</div><!-- row -->
+				
+			</div><!-- greywrap -->
+
+		</div>
+
+		<div id = "bank_map"></div>
+
+    <span>
+
+
+  	<br>
+		<hr>
+		<br>
+		<iframe width="100%" height="520" frameborder="0" src="https://tjrempel87.carto.com/viz/e406c58e-4782-11e6-9c8b-0e3ff518bd15/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+
+      </span>
+      <hr>
+      <center>
+		<p>
+		Concentration of pickup locations for dropoffs near 50 investment banks between 5am and 9am on Monday to Friday, clustered by zipcode
+		</p>
+	  </center>
+
+	  <div  id="pop_clubs" name="pop_clubs">
+		<br>
+
+     	<br>
+		  <div id="greywrap">
+			
+		    <div class="row white" >
+				<center>
+				  <div>
+
+					<span class="icon icon-headphones"></span>
+					<h2>A Journey of a Hundred Clubs</h2>
+					<p>150 nightclubs ranked by number of dropoffs</p>
+
+				  </div>
+				</center>
+				
+			</div>
+		  </div>
+		</div>
+		<br>
+		<hr>
+		<br>
+		<div id="map2" style="width: 90%; height: 100% margin: 0 auto;" class = "icon"></div>
+		<hr>
+		<div>
+	  <center>
+		<p>
+		Number of dropoffs at 150 nightclubs between 12am and 4am on Fridays and Saturdays, normalized by borough. 
+		</p>
+	  </center>
+	</div>
+
+	<div  id="tips" name="tips">
+     	<br>
+
+     	<br>
+
+	   <div id="greywrap">
+			
+	    <div class="row white">
+
+			<center>
+			   <div>
+				  <span class="icon icon-location"></span>
+
+					<h2>To be Where the People Are</h2>	
+					<p>Pickup locations to maximize earnings <p>
 
 			    </div>
 			</center>
@@ -339,7 +439,7 @@
    	<div>
 	  <center>
 		<p>
-		For a given month, day of the week and time of the time we gather the areas with highest customer concentration. These areas are obtained by applying a DBSCAN clustering algorithim to the pickup data for the selected time. Each group is then colored based on the expected earnings from pickups in that area, where we use total fare / trip duration as an earnings metric.
+		Shows areas of highest customer concentration for a given month, day of the week and time of the day. Each region colored based on expected earnings using total fare per minute as a metric.
 		</p>
 	  </center>
 	</div>
@@ -348,38 +448,7 @@
 		
  
 		<!-- ==== Night Clubs ==== -->
-		<div  id="pop_clubs" name="pop_clubs">
-		<br>
-
-     	<br>
-		  <div id="greywrap">
-			
-		    <div class="row white" >
-				<center>
-				  <div>
-
-					<span class="icon icon-bubbles"></span>
-					<h2>For Club Goers</h2>
-					<p>150 nightclubs categorized by number of dropoffs</p>
-
-				  </div>
-				</center>
-				
-			</div>
-		  </div>
-		</div>
-		<br>
-		<hr>
-		<br>
-		<div id="map2" style="width: 90%; height: 100% margin: 0 auto;" class = "icon"></div>
-		<hr>
-		<div>
-	  <center>
-		<p>
-		After collecting the names and locations of popular night clubs in NYC we examined the number of dropoffs occuring at these locations between 12am and 4am on Friday and Saturday nights. Presumaby the people using cabs to get to these locations at this time of night are likely attending a club, and so the number of dropoffs can be used as an unbiased metric for how many people are attending these venues. 
-		</p>
-	  </center>
-	</div>
+		
 
 	<div  id="club_owner" name="club_owner">
 		
@@ -393,7 +462,7 @@
 					<center>
 						<div >
 							<span class="icon icon-loop"></span>
-								<h2>For Club Owners</h2>
+								<h2>From Here to There - Are Clubbers Everywhere?</h2>
 							<p>Select a club to see where patrons tend to live</p>
 						</div><!-- col-lg-4 -->	
 					</center>
@@ -436,59 +505,20 @@
       <hr>
       <center>
 		<p>
-		For each club we look at where people being dropped off/picked up at that location were coming from/going to. We then show the concentration of attendies based on zip code so club owners can have an idea of where they should be focusing their adventising efforts. 
+		For each club look at where patrons are arriving from and going to on Friday and Saturday nights, clustered by zipcode.
 		</p>
 	  </center>
 
 
 
-		<div  id="banker" name="banker">
 		
-		<br>
-		<br>
-
-			<div id="greywrap">
-				
-				<div class="row white">
-
-					<center>
-						<div >
-							<span class="icon icon-home3"></span>
-								<h2>Where Investment Bankers Live</h2>
-							<p>Concentration of pickups for customers dropped off at investment banks</p>
-						</div><!-- col-lg-4 -->	
-					</center>
-					
-				</div><!-- row -->
-				
-			</div><!-- greywrap -->
-
-		</div>
-
-		<div id = "bank_map"></div>
-
-    <span>
-
-
-  	<br>
-		<hr>
-		<br>
-		<iframe width="100%" height="520" frameborder="0" src="https://tjrempel87.carto.com/viz/e406c58e-4782-11e6-9c8b-0e3ff518bd15/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-
-      </span>
-      <hr>
-      <center>
-		<p>
-		Looked at dropoffs near 50 investment banks between 5am and 9am on Monday to Friday and clustered the pickup locations based on zipcode 
-		</p>
-	  </center>
           
 
 		<section class="section-divider textdivider divider6">
 
 			<div class="container">
 
-				<h1>BUILT IN NEW YORK, USA.</h1>
+				<h1>"The road goes ever on and on."</h1>
 
 				<hr>
 				

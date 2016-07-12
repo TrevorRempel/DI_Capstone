@@ -144,7 +144,7 @@ def club_zipcodes():
 
 	club = request.form.get('club')
 
-	if club:
+	if club in dfClub["Name_Yelp"].values:
 
 
 		grid = dfClub[dfClub["Name_Yelp"] == club]["grid"].values[0]
@@ -160,7 +160,7 @@ def club_zipcodes():
 		club_weight = []
 		for zip_code, weight in zips.items():
 			zip_code = int(zip_code)
-			if zip_code != 11371 and zip_code !=11430:
+			if zip_code != 11371 and zip_code !=11430 and zip_code in zip_polys and weight > 0.1:
 				for poly in zip_polys[zip_code]:
 					lng,lat = poly
 					club_poly.append([list(lng),list(lat)])
