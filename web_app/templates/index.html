@@ -162,8 +162,8 @@
               <li> <a href="#heartbeat" class="smoothScroll">Heartbeat of a City</a></li>
 			  <li> <a href="#tips" class="smoothScroll"> Bankers</a></li>
 			  <li> <a href="#pop_clubs" class="smoothScroll"> Club Goers</a></li>
-			  <li> <a href="#club_owner" class="smoothScroll">Tips</a></li>
-			  <li> <a href="#banker" class="smoothScroll">Club Owners</a></li>
+			  <li> <a href="#club_owner" class="smoothScroll">Club Owners</a></li>
+			  <li> <a href="#banker" class="smoothScroll">Where the People Are</a></li>
 			  <li> <a href="#contact" class="smoothScroll"> Contact</a></li>
 
 		     </ul>
@@ -306,7 +306,79 @@
 	</div>
    
 
-     <div  id="tips" name="tips">
+
+
+		
+		
+ 
+
+
+
+		<div  id="club_owner" name="club_owner">
+		
+		<br>
+		<br>
+
+			<div id="greywrap">
+				
+				<div class="row white">
+
+					<center>
+						<div >
+							<span class="icon icon-loop"></span>
+								<h2>From Here to There - Are Clubbers Everywhere?</h2>
+							<p>Select a club to see where patrons tend to live</p>
+						</div><!-- col-lg-4 -->	
+					</center>
+					
+				</div><!-- row -->
+				
+			</div><!-- greywrap -->
+
+		</div>
+
+		<div id = "club_map"></div>
+
+    <span>
+
+
+  	<br>
+		<hr>
+		<br>
+		<div id="map3" style="width: 90%; height: 100% margin: 0 auto;" class = "icon"></div>
+
+          <form id='select-club' method='post' action='club_zipcodes' class = "form-inline">
+
+			    
+				<div class="form-group">
+				    
+				    <!-- <label>Month</label>
+				     -->
+				      <input class = "form-control" type = "text" id = 'club' name='club' value="" readOnly="true"> 
+	             </div>	 
+
+				   
+				    	<button class="btn btn-default" type='submit' value='Club' >Submit</button>
+				
+			
+                
+       
+          </form>
+
+      </span>
+      <hr>
+      <center>
+		<p>
+		For each club shows where patrons are arriving from and going to on Friday and Saturday nights, clustered by zipcode.
+
+		</p>
+	  </center>
+          
+
+		</div> 
+
+
+		   <div  id="tips" name="tips">
      	<br>
 
      	<br>
@@ -320,7 +392,7 @@
 				  <span class="icon icon-location"></span>
 
 					<h2>To be Where the People Are</h2>	
-					<p>Pickup locations to maximize earnings <p>
+					<p> Areas where people tend to be concentrated<p>
 
 			    </div>
 			</center>
@@ -331,8 +403,9 @@
 
       </div>
 
+		<div id = "tip_map"></div>
 
-<div id = "tip_map"></div>
+
 
     <span>
 
@@ -416,81 +489,11 @@
    	<div>
 	  <center>
 		<p>
-		Shows areas of highest customer concentration for a given month, day of the week, and time of the day. Each region colored based on expected earnings using total fare per minute as a metric. 
+		Shows areas of where people are most highly concentrated for a given month, day of the week and time of the day. Each area is colored based on the number of people.
 		</p>
 	  </center>
 	</div>
 
-		
-		
- 
-
-
-
-		<div  id="club_owner" name="club_owner">
-		
-		<br>
-		<br>
-
-			<div id="greywrap">
-				
-				<div class="row white">
-
-					<center>
-						<div >
-							<span class="icon icon-loop"></span>
-								<h2>From Here to There - Are Clubbers Everywhere?</h2>
-							<p>Select a club to see where patrons tend to live</p>
-						</div><!-- col-lg-4 -->	
-					</center>
-					
-				</div><!-- row -->
-				
-			</div><!-- greywrap -->
-
-		</div>
-
-		<div id = "club_map"></div>
-
-    <span>
-
-
-  	<br>
-		<hr>
-		<br>
-		<div id="map3" style="width: 90%; height: 100% margin: 0 auto;" class = "icon"></div>
-
-          <form id='select-club' method='post' action='club_zipcodes' class = "form-inline">
-
-			    
-				<div class="form-group">
-				    
-				    <!-- <label>Month</label>
-				     -->
-				      <input class = "form-control" type = "text" id = 'club' name='club' value="" readOnly="true"> 
-	             </div>	 
-
-				   
-				    	<button class="btn btn-default" type='submit' value='Club' >Submit</button>
-				
-			
-                
-       
-          </form>
-
-      </span>
-      <hr>
-      <center>
-		<p>
-		For each club shows where patrons are arriving from and going to on Friday and Saturday nights, clustered by zipcode.
-
-		</p>
-	  </center>
-          
-
-		</div> 
-
-		
           
 
 	

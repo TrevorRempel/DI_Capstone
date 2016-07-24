@@ -21,18 +21,18 @@ days_list = ["Monday","Tuesday","Wednesday", "Thursday", "Friday", "Saturday", "
 months_list = ["January","February","March", "April","May", "June", "July","August", "September","October",\
 "November","December"]
 
-with open("cmap.dill", "r") as f:
+with open("../data/cmap.dill", "r") as f:
 	cmap = dill.load(f)
 
-with open("zip_polys.dill","r") as f:
+with open("../data/zip_polys.dill","r") as f:
 	zip_polys = dill.load(f)
 
-with open("zip_club.dill","r") as f:
+with open("../data/zip_club.dill","r") as f:
 	zip_club = dill.load(f)
 
 
 
-dfClub = pd.read_csv("night_info.csv",encoding = 'utf-8').sort_values("percent", ascending = False)
+dfClub = pd.read_csv("../data/night_info.csv",encoding = 'utf-8').sort_values("percent", ascending = False)
 
 club_counts,lat_club,lng_club,club_names,club_urls = zip(*dfClub[["percent","Lat","Long","Name_Yelp","url"]].values)
 
@@ -65,7 +65,6 @@ def index():
 
 
 	if request.method == 'POST':
-		print request.form.keys()
 
 		to_render = 'index2.html'
 		if 'month' in request.form.keys():
@@ -87,16 +86,16 @@ def index():
 			time = int(time)
 
 			
-			to_load = "new_cluster_" + month_str +".dill"
+			to_load = "../data/new_cluster_area_" + month_str +".dill"
 			with open(to_load, "r") as f:
 				poly_info = dill.load(f)[(month_val,day_val,time)]
 			app.tip_poly = []
 			for polygon in poly_info["poly"].values:
 				lng, lat = polygon
 				app.tip_poly.append([list(lng),list(lat)])
-			app.tip_weight = ["{:.1f}".format(val) for val in list(poly_info["percent"].values)]
+			app.tip_weight = ["{:.0f}".format(val) for val in list(poly_info["counts"].values)]
 
-			tip_percents = [math.log(val + 1) for val in poly_info["percent"].values]
+			tip_percents = [math.sqrt(val+1)  for val in poly_info["counts"].values]
 			MAX_VAL = max(tip_percents)+0.001
 			tip_percents = [val/MAX_VAL for val in tip_percents]
 			
@@ -109,7 +108,7 @@ def index():
 		else:
 			scroll = 'nav-bar main'
 	
-		print app.tip_weight
+
 		return render_template(to_render,scroll = scroll, src = app.SRC,
 			month = month, day = day, time = time, time_list = range(24), month_list = months_list,\
 			day_list = days_list,lat_club = lat_club,lng_club = lng_club,club_counts = club_counts,club_names= club_names,\
@@ -143,7 +142,6 @@ def club_zipcodes():
 	time = today.hour
 
 	club = request.form.get('club')
-	print club
 
 	if club:
 
